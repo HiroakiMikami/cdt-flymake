@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.cdt.core.ErrorParser">
+         <errorparser 
+        class="flymake.GppErrorParser" 
+        id="mikami.github.cdt-flymake.GppFlymakeErrorParser">
+      <context type="codan" />
+    </errorparser>
+  </extension>
+  <extension point="org.eclipse.cdt.codan.core.checkers">
+    <category id="flymake.category" name="g++ flymake" />
+    <checker class="flymake.GppChecker" id="flymake.gppChecker" name="G++FlymakeChecker">
+      <problem 
+        id="mikami.github.cdt-flymake.error" 
+        name="Error" 
+        defaultEnabled="true" defaultSeverity="Error" messagePattern="{0}"
+        category="flymake.category"/>
+      <problem 
+        id="mikami.github.cdt-flymake.warning" 
+        name="Warning" 
+        defaultEnabled="true" defaultSeverity="Warning" messagePattern="{0}"
+        category="flymake.category"/>
+    </checker>
+  </extension>
+</plugin>
