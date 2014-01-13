@@ -13,7 +13,6 @@ import org.eclipse.core.resources.IFile;
 
 
 public class GppErrorParser implements IErrorParser {
-	public GppErrorParser(){}
 	/*
 	 * sample line to parse
 	 *  a.c:9:9: 警告: 変数 ‘xs’ が設定されましたが使用されていません [-Wunused-but-set-variable]
@@ -25,7 +24,6 @@ public class GppErrorParser implements IErrorParser {
 	 * 5:エラーメッセージ
 	 */
 	private static Pattern pattern = Pattern.compile("(.*):(\\d+):(\\d+):\\s*(.*):\\s*(.*)");
-	// TODO: コンパイルは通るけど、エラー報告がなされない。
 	@Override
 	public boolean processLine(String line, ErrorParserManager parserManager) {
 		Matcher matcher = getPattern().matcher(line);
