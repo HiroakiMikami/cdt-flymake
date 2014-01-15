@@ -27,7 +27,9 @@ public class GppChecker extends AbstractExternalToolBasedChecker {
 	    PROBLEM_IDS.put(IMarkerGenerator.SEVERITY_WARNING,        "mikami.github.cdt-flymake.warning");
 	}
 	
-	private static final ConfigurationSettings settings = new ConfigurationSettings("flymake", new File("g++"), "-fsyntax-only -Wall -std=c++0x");
+	private static final String defaultArgs = "-fsyntax-only -Wall -std=c++0x";
+	private static final ConfigurationSettings settings = 
+			new ConfigurationSettings("flymake", new File("g++"), defaultArgs);
 	
     public GppChecker() {
     	super(settings);
@@ -37,7 +39,10 @@ public class GppChecker extends AbstractExternalToolBasedChecker {
     public boolean processResource(IResource resource) {
     	try{
 		    MapProblemPreference preference = (MapProblemPreference) getProblemById(getReferenceProblemId(), resource).getPreference();
-    	    String path = preference.getChildDescriptor(settings.getArgs().getDescriptor().getKey()).getValue().toString();
+		    /**
+		     * TODO 変更を一切保存しないことになる。
+		     */
+    	    String path = defaultArgs;//preference.getChildDescriptor(settings.getArgs().getDescriptor().getKey()).getValue();
 			IIncludeReference[] includeLists = new CProject(null, resource.getProject()).getIncludeReferences();
 		    for(int i = 0; i < includeLists.length; i++){
 			    IIncludeReference test = includeLists[i];
